@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <zj2></zj2>
+    </div>
+    <script type="text/x-template" id="zj">
+        <p>我是组件1</p>
+    </script>
+    <template id="zj2">
+        <!-- 一定要注意组件里面要是有多个标签，一定要在最外有个标签包住 -->
+        <div>
+            <p>我是组件2</p>
+            <zj></zj>
+        </div>
+    </template>
+    <script>
+        // 父子组件：组件一放在组件二里，那么组件二就是父组件，父组件在实例里再注册就可以用
+        // 组件1
+        var zj = {
+            template: '#zj'
+        }
+        // 组件2
+        var zj2 = {
+            template: '#zj2',
+            components: {
+                zj: zj
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            components: {
+                zj2
+            }
+        })
+    </script>
+</body>
+
+</html>

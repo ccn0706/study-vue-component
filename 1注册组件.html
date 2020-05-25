@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 3.使用组价 -->
+        <my-zj></my-zj>
+        <my-zj></my-zj>
+        <my-zj></my-Zj>
+    </div>
+    <script>
+        // 1.创建组件构造器对象
+        const zj = Vue.extend({
+            template: `<p>hello world</p>`
+        })
+        // 2.注册组件  这是全局组件
+        // 注意点VUE是允许用大写字母来注册组件的，但当你使用时得在驼峰命名的大写字母间加上”-“并都改为小写，最好使用小写的注册
+        Vue.component('myZj', zj)
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

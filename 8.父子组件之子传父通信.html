@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 父组件模板 -->
+    <div id="app">
+        <!-- 2.父组件接收事件 -->
+        <!-- 注意如果这里有传参数过来，cpnClick后面不能加括号。这里会默认把子组件的参数传递到父组件。不管有没有参数都不要写括号 -->
+        <zj2 @itemclick="cpnClick"></zj2>
+    </div>
+    <!-- 子组件模板 -->
+    <template id="zj2">
+        <div>
+            <button v-for="item in category" @click="btnClick(item.id)">{{item.name}}</button>
+        </div>
+    </template>
+    <script>
+        // 子组件
+        var zj2 = {
+            template: '#zj2',
+            props: {
+                cmsg:String,
+            },
+            data(){
+                return{
+                    category:[{id:'aaa',name:'热门精选'},{id:'bbb',name:'数码家电'},{id:'ccc',name:'电脑办公'}]
+                }
+            },
+            methods: {
+                btnClick(item){
+                    // $emit事件发射，itemClick是发射的事件,事件最好不要使用驼峰。item是参数
+                    this.$emit('itemclick',item);
+                }
+            }
+        }
+        // 子组件
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg: '父传子',
+                movie: ['海尔兄弟', '海贼王']
+            },
+            components: {
+                zj2
+            },
+            methods: {
+                cpnClick(item){
+                    console.log(item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

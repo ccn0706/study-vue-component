@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <zj></zj>
+    </div>
+    <template id="zj">
+        <div>
+            <p>我是子组件</p>
+            <button @click="vistor()">访问父组件</button>
+        </div>
+    </template>
+    <script>
+        const zj = {
+            template: '#zj',
+            methods: {
+                vistor() {
+                    console.log(this.$parent)
+                    this.$parent.showMsg();
+                }
+                
+            }
+        }
+        
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components: {
+                zj
+            },
+            methods: {
+                showMsg() {
+                    console.log('访问父组件的方法');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

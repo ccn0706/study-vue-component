@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- cmovie是props定义的，movie是父组件的data -->
+        <!-- 注意：v-bind里不支持驼峰写法，如果真的是驼峰得这样写。如cMsg应写成c-msg -->
+        <zj2 :cmovie="movie" :cmsg="msg"></zj2>
+    </div>
+    <template id="zj2">
+        <div>
+            <!-- 这里使用子组件的props定义的 -->
+            <h1>{{cmsg}}</h1>
+            <p>我是父组件的data：{{cmovie}}</p>
+            <p>我是子组件的data：{{name}}</p>
+        </div>
+    </template>
+    <script>
+        // 父子组件通信，需要借助props，它是property的缩写。然后在父组件绑定
+        // 组件2
+        var zj2 = {
+            template: '#zj2',
+            // 数组写法
+            // props: ['cmovie', 'cmsg'],
+            // 对象写法
+            props: {
+                // 定义类型
+                cmsg:String,
+                cmovie:{
+                    type:Array,
+                    // 类型是对象或者是数组时，默认值必须是一个函数
+                    // 这个默认值是指在父组件中没有绑定的时候，然后在子组件中使用
+                    default(){
+                        return [];
+                    },
+                    // 必须传值
+                    required:true
+                }
+            },
+            data(){
+                return{
+                    name:'ccn'
+                }
+            }
+        }
+        // 根组件
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg: '父传子',
+                movie: ['海尔兄弟', '海贼王']
+            },
+            components: {
+                zj2
+            }
+        })
+    </script>
+</body>
+
+</html>

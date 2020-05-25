@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      
+        <zj>
+            <button>2222</button>
+        </zj>
+        <zj>
+            <button>333</button>
+        </zj>
+        <zj></zj>
+        <zj></zj>
+    </div>
+    <template id="zj">
+        <div>
+            <h2>我是组件</h2>
+            <!-- <slot></slot> -->
+            <!-- 默认值，当调用没使用插槽时就显示默认值 -->
+            <slot><button>按钮</button></slot>
+        </div>
+    </template>
+    <script>
+        // 插槽的作用是为了提高复用性，给固定的位置预留位置，使里面的内容是活的
+        const zj={
+            template:'#zj'
+        }
+        var app=new Vue({
+            el:'#app',
+            data:{
+                
+            },
+            components: {
+                zj
+            }
+        })
+    </script>
+</body>
+</html>

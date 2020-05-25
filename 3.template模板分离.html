@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 3.使用组件 -->
+        <my-zj></my-zj>
+        <zj2></zj2>
+    </div>
+    <!-- 方法一：使用script标签，记得添加type="text/x-template"及id -->
+    <script type="text/x-template" id="zj">
+        <p>我是组件1</p>
+    </script>
+    <!-- 方法二：记得id -->
+    <template id="zj2">
+        <p>我是组件2</p>
+    </template>
+    <script>
+        Vue.component('myZj', {
+            template: '#zj'
+        })
+        Vue.component('zj2', {
+            template: '#zj2'
+        })
+        var app=new Vue({
+            el:'#app',
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <zj></zj>
+        <zj>
+            <!-- 如果没有写只会替换那些没有写name的插槽 -->
+            <span slot="center">标题</span> 
+        </zj>
+    </div>
+    <template id="zj">
+        <div>
+            <!-- 具名插槽 -->
+           <slot name="left"><span>左边</span></slot>
+           <slot name="center"><span>中间</span></slot>
+           <slot name="right"><span>右边</span></slot>
+        </div>
+    </template>
+    <script>
+        // 插槽的作用是为了提高复用性，给固定的位置预留位置，使里面的内容是活的
+        const zj={
+            template:'#zj'
+        }
+        var app=new Vue({
+            el:'#app',
+            data:{
+                
+            },
+            components: {
+                zj
+            }
+        })
+    </script>
+</body>
+</html>

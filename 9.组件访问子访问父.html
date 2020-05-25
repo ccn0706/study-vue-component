@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <zj></zj>
+        <zj ref="aaa"></zj>
+        <zj></zj>
+        <button @click="vistor()">访问子组件</button>
+    </div>
+    <template id="zj">
+        <div>
+            <p>我是子组件</p>
+        </div>
+    </template>
+    <script>
+        const zj = {
+            template: '#zj',
+            methods: {
+                showMsg() {
+                    console.log('访问子组件的方法');
+                }
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components: {
+                zj
+            },
+            methods: {
+                vistor() {
+                    // 方法1：this.$children
+                    // 是一个数组，调用几个组件就有几个
+                    // console.log(this.$children);
+                    // this.$children[0].showMsg()
+
+                    // 方法2：this.$refs。这边一定要在调用组件时加入属性ref=""
+                      console.log(this.$refs);  
+                      this.$refs.aaa.showMsg();
+
+                    // 注意：$children在开发中很少用，因为他是通过下标值来取对应的组件，如果在中间插入组件的话，下标值会改变。所以，我们可以用$refs。他只需在组件中加ref属性就好，如ref="aaa”，
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

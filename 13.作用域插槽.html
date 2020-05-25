@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <zj></zj>
+        <!-- 不满足子组件的排班，父组件做替换，数据还是由子组件提供 -->
+        <!-- 在vue2.5.x以下，需要template，以上的不需要，目的是为了获取子组件的数据 -->
+        <zj>
+            <!-- 2.在父组件中设置一个对象，slot是自定义的 -->
+            <template slot-scope="slot">
+                <span v-for="item in slot.data">{{item}}-</span>
+            </template>
+        </zj>
+    </div>
+    <template id="zj">
+        <div>
+            <!-- 1.插槽加一个自定义的属性，并把子组件的数据赋值给他，这里的data属性是自定义的 -->
+            <slot :data="movies">
+                <ul>
+                    <li v-for="item in movies">{{item}}</li>
+                </ul>
+            </slot>
+        </div>
+    </template>
+    <script>
+        // 插槽的作用是为了提高复用性，给固定的位置预留位置，使里面的内容是活的
+        const zj = {
+            template: '#zj',
+            data() {
+                return {
+                    movies: ['西游记', '水浒传', '三国演义']
+                }
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components: {
+                zj
+            }
+        })
+    </script>
+</body>
+
+</html>

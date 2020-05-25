@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <zj></zj>
+    </div>
+    <template id="zj2">
+        <p>我是局部组件</p>
+    </template>
+    <script>
+       
+        var zj = {
+            template: '#zj2'
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            // 局部组件：在哪个vue的实例注册，就在哪个使用  注意是components 跟全局比多了s
+            // components: {
+            //     zj:zj,
+            //     // 或者es6写法
+            //     // zj
+            // }
+            // 语法糖
+            components: {
+                zj
+            }
+        })
+    </script>
+</body>
+
+</html>
